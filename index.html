@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoTech Solutions | Productos Digitales</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef1e7;
+      color: #26351f;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 230px;
+      height: 100vh;
+      background: linear-gradient(180deg, #163b22, #526846);
+      padding: 25px 18px;
+      color: white;
+      z-index: 1000;
+      box-shadow: 4px 0 18px rgba(0,0,0,0.25);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo .leaf {
+      width: 70px;
+      height: 70px;
+      margin: auto;
+      border-radius: 18px;
+      background: radial-gradient(circle, #78b56b, #12351e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      box-shadow: 0 0 20px rgba(152, 255, 156, 0.4);
+    }
+
+    .logo-img {
+      width: 95px;
+      height: 95px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 0 20px rgba(152, 255, 156, 0.4);
+      display: block;
+      margin: auto;
+    }
+
+    .logo h2 {
+      margin-top: 10px;
+      font-size: 19px;
+      letter-spacing: 1px;
+    }
+
+    .logo p {
+      font-size: 11px;
+      opacity: 0.8;
+      margin-top: 5px;
+    }
+
+    .menu a,
+    .nav-btn {
+      display: block;
+      width: 100%;
+      color: white;
+      text-decoration: none;
+      padding: 13px 12px;
+      margin: 8px 0;
+      border-radius: 14px;
+      font-size: 14px;
+      transition: 0.3s;
+      background: rgba(255,255,255,0.08);
+      border: none;
+      text-align: left;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .menu a:hover,
+    .menu a.active-link,
+    .nav-btn:hover,
+    .nav-btn.active-link {
+      background: #dbe8ca;
+      color: #183b22;
+      transform: translateX(6px);
+    }
+
+    .content {
+      margin-left: 230px;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 70px 7%;
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .hero.active {
+      display: flex;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(20, 53, 31, 0.88), rgba(20, 53, 31, 0.82)),
+                  radial-gradient(circle at top right, #89a87a, transparent 35%),
+                  radial-gradient(circle at bottom left, #7aa86e, transparent 30%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      border: 2px solid rgba(255,255,255,0.12);
+      border-radius: 48% 52% 35% 65%;
+      right: -140px;
+      top: -80px;
+      transform: rotate(25deg);
+    }
+
+    .hero-text {
+      max-width: 650px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-size: 58px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    .hero-text h1 span {
+      color: #cfe4b6;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      max-width: 560px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #dbe8ca;
+      color: #173b22;
+      padding: 14px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      background: white;
+    }
+
+    .hero-card {
+      width: 320px;
+      min-height: 360px;
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 35px;
+      padding: 25px;
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+
+    .hero-card .screen {
+      background: #f5f7ee;
+      height: 190px;
+      border-radius: 22px;
+      padding: 15px;
+      color: #183b22;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 22px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.22);
+    }
+
+    .fake-bar {
+      height: 12px;
+      background: #36583a;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .fake-line {
+      height: 9px;
+      background: #90a884;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+
+    .hero-card h3 {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+
+    .hero-card p {
+      margin-top: 10px;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .title small {
+      color: #6d7d60;
+      letter-spacing: 2px;
+      font-weight: bold;
+    }
+
+    .title h2 {
+      font-size: 44px;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: #204327;
+      margin-top: 8px;
+    }
+
+    .title .line {
+      width: 120px;
+      height: 4px;
+      background: #78906a;
+      margin: 16px auto 0;
+      border-radius: 20px;
+    }
+
+    .about {
+      background: #f6f4ed;
+    }
+
+    .about-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .about-img {
+      height: 390px;
+      border-radius: 45px 45px 0 45px;
+      background: linear-gradient(135deg, #183b22, #8ca77a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 120px;
+      box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+      overflow: hidden;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-text {
+      background: white;
+      padding: 35px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .mission-vision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 25px;
+    }
+
+    .mv-card {
+      background: #eef1e7;
+      border-left: 5px solid #728263;
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .mv-card h3 {
+      color: #214628;
+      margin-bottom: 8px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px;
+    }
+
+    .mv-card p {
+      color: #4e5848;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .products {
+      background: #eef1e7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .product-card {
+      background: #fffaf1;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      transition: 0.3s;
+      border: 1px solid #d9dfd0;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+    }
+
+    .product-img {
+      height: 180px;
+      background: linear-gradient(135deg, #12351e, #6c8b5d);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 70px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-img::after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      right: -35px;
+      top: -35px;
+    }
+
+    .product-info {
+      padding: 25px;
+    }
+
+    .product-info h3 {
+      color: #314f30;
+      font-size: 22px;
+      margin-bottom: 6px;
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    .code {
+      font-size: 12px;
+      font-weight: bold;
+      color: #6f7d64;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .product-info p {
+      color: #4d5548;
+      line-height: 1.5;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .product-info ul {
+      margin-left: 18px;
+      color: #4d5548;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .price {
+      margin-top: 18px;
+      display: inline-block;
+      background: #728263;
+      color: white;
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .hire-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 22px;
+      background: #204327;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hire-btn:hover {
+      background: #6f8062;
+      transform: translateY(-3px);
+    }
+
+    .contract {
+      background: #eef1e7;
+    }
+
+    .contract-box {
+      display: grid;
+      grid-template-columns: 0.9fr 1.4fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .info-card, .form-card {
+      background: white;
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.10);
+      border: 1px solid #dce3d4;
+    }
+
+    .info-card h3, .form-card h3 {
+      color: #214628;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+
+    .info-card p {
+      line-height: 1.6;
+      color: #4e5848;
+      margin-bottom: 15px;
+    }
+
+    .info-card ul {
+      margin-left: 20px;
+      line-height: 1.8;
+      color: #4e5848;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / span 2;
+    }
+
+    label {
+      font-weight: bold;
+      color: #354b2e;
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #cbd4c2;
+      border-radius: 15px;
+      padding: 12px 14px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fbfcf8;
+      color: #26351f;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #728263;
+      box-shadow: 0 0 0 3px rgba(114,130,99,0.18);
+    }
+
+    .submit-btn {
+      margin-top: 18px;
+      border: none;
+      background: #204327;
+      color: white;
+      padding: 14px 26px;
+      border-radius: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #6a7562;
+      line-height: 1.5;
+    }
+
+    .canvas {
+      background: #f6f4ed;
+    }
+
+    .canvas-layout {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: 220px 220px 180px;
+      gap: 12px;
+    }
+
+    .canvas-box {
+      background: white;
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+      border: 1px solid #dce3d4;
+    }
+
+    .canvas-box h3 {
+      color: #214628;
+      margin-bottom: 10px;
+      font-size: 17px;
+    }
+
+    .canvas-box ul {
+      margin-left: 17px;
+      line-height: 1.5;
+      font-size: 13px;
+      color: #4e5848;
+    }
+
+    .value {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+      background: #dbe8ca;
+    }
+
+    .costs {
+      grid-column: 1 / span 3;
+      grid-row: 3;
+      background: #e6ecde;
+    }
+
+    .income {
+      grid-column: 4 / span 2;
+      grid-row: 3;
+      background: #d7e1cd;
+    }
+
+    .payments {
+      background: linear-gradient(180deg, #738463, #4e6348);
+      color: white;
+    }
+
+    .payments .title h2,
+    .payments .title small {
+      color: white;
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .payment-card {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 30px;
+      padding: 30px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .payment-card .icon {
+      font-size: 45px;
+      margin-bottom: 12px;
+    }
+
+    .payment-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .payment-card p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .contact {
+      background: #f6f4ed;
+    }
+
+    .contact-box {
+      max-width: 850px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .contact-item {
+      background: white;
+      border-radius: 22px;
+      padding: 22px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+    }
+
+    .contact-item span {
+      font-size: 32px;
+      background: #dbe8ca;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+    }
+
+    footer {
+      margin-left: 230px;
+      background: #163b22;
+      color: white;
+      text-align: center;
+      padding: 22px;
+    }
+
+    @media (max-width: 950px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+
+      .menu {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .menu a {
+        margin: 0;
+      }
+
+      .content, footer {
+        margin-left: 0;
+      }
+
+      .hero, .about-box, .contact-box {
+        grid-template-columns: 1fr;
+        display: block;
+      }
+
+      .hero-card {
+        margin-top: 35px;
+        width: 100%;
+      }
+
+      .grid, .payment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .canvas-layout {
+        display: block;
+      }
+
+      .canvas-box {
+        margin-bottom: 15px;
+      }
+
+      .hero-text h1 {
+        font-size: 42px;
+      }
+
+      .contract-box, .form-grid, .mission-vision {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: 1;
+      }
+    }
+  </style>
+</head>
+<body onload="abrirSeccion('inicio')">
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="LOGO.png" alt="Logo EcoTech Solutions" class="logo-img">
+      <h2>EcoTech</h2>
+      <p>Solutions</p>
+    </div>
+
+    <nav class="menu">
+      <button class="nav-btn active-link" type="button" onclick="abrirSeccion('inicio', this)"> Inicio</button>
+      <button class="nav-btn" type="button" onclick="abrirSeccion('quienes', this)"> Quiénes somos</button>
+      <button class="nav-btn" type="button" onclick="abrirSeccion('productos', this)"> Productos</button>
+      <button class="nav-btn" type="button" onclick="abrirSeccion('contratar', this)"> Contratar</button>
+      <button class="nav-btn" type="button" onclick="abrirSeccion('pagos', this)"> Formas de pago</button>
+      <button class="nav-btn" type="button" onclick="abrirSeccion('contacto', this)"> Contacto</button>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <section class="hero active" id="inicio">
+      <div class="hero-text">
+        <h1>Productos digitales para negocios <span>ecológicos</span></h1>
+        <p>
+          En EcoTech Solutions creamos páginas web, tiendas en línea y herramientas digitales para que los negocios ecológicos puedan vender, organizar sus productos y mejorar su presencia en internet.
+        </p>
+        <button class="btn" type="button" onclick="abrirSeccion('productos')">Ver productos</button>
+      </div>
+
+      <div class="hero-card">
+        <img src="inicio_imagen.png" alt="Imagen de inicio EcoTech" class="hero-img">
+        <h3>Diseño con estilo ecológico</h3>
+        <p>Páginas con colores, imágenes y estructura acorde al tipo de negocio del cliente.</p>
+      </div>
+    </section>
+
+    <section class="about" id="quienes">
+      <div class="title">
+        <small>ECOTECH SOLUTIONS</small>
+        <h2>¿Quiénes somos?</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="about-box">
+        <div class="about-img image-box"><img src="quienessomos.png" alt="Equipo EcoTech Solutions"></div>
+        <div class="about-text">
+          <p>
+            EcoTech Solutions es una empresa enfocada en crear productos digitales para negocios ecológicos. Nuestro objetivo es ayudar a pequeñas empresas, tiendas orgánicas y emprendedores a tener una mejor presencia en internet.
+          </p>
+          <br />
+          <p>
+            Trabajamos con un enfoque profesional de TI: primero entendemos lo que necesita el cliente, después organizamos la información y finalmente desarrollamos una solución clara, útil y fácil de usar.
+          </p>
+
+          <div class="mission-vision">
+            <div class="mv-card">
+              <h3>Misión</h3>
+              <p>
+                Crear productos digitales sencillos, modernos y funcionales que ayuden a los negocios ecológicos a darse a conocer, vender mejor y organizar su información de manera más clara.
+              </p>
+            </div>
+
+            <div class="mv-card">
+              <h3>Visión</h3>
+              <p>
+                Ser una empresa reconocida por apoyar a negocios sustentables con soluciones tecnológicas accesibles, creativas y adaptadas a las necesidades de cada cliente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="products" id="productos">
+      <div class="title">
+        <small>NUESTROS PRODUCTOS</small>
+        <h2>Catálogo digital</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="grid">
+        <article class="product-card">
+          <div class="product-img">🌐</div>
+          <div class="product-info">
+            <h3>Desarrollo de sitios web</h3>
+            <div class="code">PRODUCTO ES-001</div>
+            <p>Producto digital para crear una página moderna y atractiva para negocios ecológicos.</p>
+            <ul>
+              <li>Diseño adaptable a celular</li>
+              <li>Información del negocio</li>
+              <li>Galería de productos</li>
+              <li>Formulario de contacto</li>
+            </ul>
+            <div class="price">$5,000</div>
+            <button class="hire-btn" type="button" onclick="abrirSeccion('contratar')">Seleccionar y contratar</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img">🛒</div>
+          <div class="product-info">
+            <h3>Tienda en línea</h3>
+            <div class="code">PRODUCTO ES-002</div>
+            <p>Plataforma digital para vender productos ecológicos en internet.</p>
+            <ul>
+              <li>Catálogo de productos</li>
+              <li>Carrito de compras</li>
+              <li>Gestión de precios</li>
+              <li>Panel administrativo</li>
+            </ul>
+            <div class="price">$8,000</div>
+            <button class="hire-btn" type="button" onclick="abrirSeccion('contratar')">Seleccionar y contratar</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img">📦</div>
+          <div class="product-info">
+            <h3>Sistema de inventario</h3>
+            <div class="code">PRODUCTO ES-003</div>
+            <p>Herramienta digital para registrar y controlar productos disponibles.</p>
+            <ul>
+              <li>Registro de productos</li>
+              <li>Control de existencias</li>
+              <li>Actualización de inventario</li>
+              <li>Organización por categorías</li>
+            </ul>
+            <div class="price">$6,500</div>
+            <button class="hire-btn" type="button" onclick="abrirSeccion('contratar')">Seleccionar y contratar</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img">📖</div>
+          <div class="product-info">
+            <h3>Catálogo digital</h3>
+            <div class="code">PRODUCTO ES-004</div>
+            <p>Catálogo interactivo para mostrar productos o servicios de forma profesional.</p>
+            <ul>
+              <li>Diseño por categorías</li>
+              <li>Imágenes de productos</li>
+              <li>Navegación sencilla</li>
+              <li>Formato adaptable</li>
+            </ul>
+            <div class="price">$3,500</div>
+            <button class="hire-btn" type="button" onclick="abrirSeccion('contratar')">Seleccionar y contratar</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img">📣</div>
+          <div class="product-info">
+            <h3>Marketing digital</h3>
+            <div class="code">PRODUCTO ES-005</div>
+            <p>Estrategias digitales para aumentar la visibilidad del negocio.</p>
+            <ul>
+              <li>Gestión de redes sociales</li>
+              <li>Creación de contenido</li>
+              <li>Publicidad básica</li>
+              <li>Análisis de alcance</li>
+            </ul>
+            <div class="price">$4,500</div>
+            <button class="hire-btn" type="button" onclick="abrirSeccion('contratar')">Seleccionar y contratar</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img">🛠️</div>
+          <div class="product-info">
+            <h3>Mantenimiento web</h3>
+            <div class="code">PRODUCTO ES-006</div>
+            <p>Actualización y mejora continua del sitio web del cliente.</p>
+            <ul>
+              <li>Actualización de contenido</li>
+              <li>Corrección de errores</li>
+              <li>Optimización básica</li>
+              <li>Soporte técnico</li>
+            </ul>
+            <div class="price">$2,000</div>
+            <button class="hire-btn" type="button" onclick="abrirSeccion('contratar')">Seleccionar y contratar</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="contract" id="contratar">
+      <div class="title">
+        <small>CONTRATA TU PRODUCTO DIGITAL</small>
+        <h2>Selecciona y solicita</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="contract-box">
+        <div class="info-card">
+          <h3>¿Qué información necesitamos?</h3>
+          <p>
+            Para hacer el producto digital, primero el cliente nos deja sus datos generales y nos explica qué necesita. Después, uno de nuestros trabajadores se comunica personalmente por WhatsApp para pedir la información completa y resolver dudas.
+          </p>
+          <ul>
+            <li>Nombre de la empresa o negocio</li>
+            <li>Logo, colores o estilo que le gustaría</li>
+            <li>Fotos o imágenes de sus productos</li>
+            <li>Lista de productos o servicios que quiere mostrar</li>
+            <li>Precios, horarios, ubicación y redes sociales</li>
+            <li>Funciones que necesita: catálogo, carrito, formulario, inventario, etc.</li>
+            <li>Referencias de páginas que le gusten</li>
+          </ul>
+          <p>
+            Si el cliente tiene imágenes, documentos o ideas más detalladas, se pueden enviar directamente por WhatsApp para que el equipo las revise antes de iniciar el trabajo.
+          </p>
+        </div>
+
+        <div class="form-card">
+          <h3>Formulario de contratación</h3>
+          <form id="formSolicitud">
+            <div class="form-grid">
+              <div class="field">
+                <label>Producto que desea contratar</label>
+                <select id="productoContratado">
+                  <option>Desarrollo de sitios web - $5,000</option>
+                  <option>Tienda en línea - $8,000</option>
+                  <option>Sistema de inventario - $6,500</option>
+                  <option>Catálogo digital - $3,500</option>
+                  <option>Marketing digital - $4,500</option>
+                  <option>Mantenimiento web - $2,000</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Nombre del cliente</label>
+                <input id="nombreCliente" type="text" placeholder="Ej. Ana Martínez" required />
+              </div>
+
+              <div class="field">
+                <label>Nombre de la empresa</label>
+                <input id="nombreEmpresa" type="text" placeholder="Ej. EcoMarket Verde" required />
+              </div>
+
+              <div class="field">
+                <label>Tipo de negocio</label>
+                <input id="tipoNegocio" type="text" placeholder="Ej. Tienda orgánica, productos naturales" />
+              </div>
+
+              <div class="field">
+                <label>Correo electrónico</label>
+                <input id="correo" type="email" placeholder="correo@ejemplo.com" required />
+              </div>
+
+              <div class="field">
+                <label>Teléfono o WhatsApp</label>
+                <input id="whatsapp" type="tel" placeholder="81 0000 0000" required />
+              </div>
+
+              <div class="field full">
+                <label>Información que quiere que tenga su producto</label>
+                <textarea id="informacionProducto" placeholder="Escriba aquí qué quiere que aparezca: secciones, productos, servicios, precios, horarios, ubicación, contacto, redes sociales o cualquier dato importante."></textarea>
+              </div>
+
+              <div class="field full">
+                <label>Estilo o idea que le gustaría</label>
+                <textarea id="estiloDeseado" placeholder="Ej. colores verdes, estilo ecológico, imágenes naturales, diseño sencillo, moderno, elegante, etc."></textarea>
+              </div>
+
+              <div class="field full">
+                <label>Funciones que necesita</label>
+                <textarea id="funcionesNecesarias" placeholder="Ej. formulario de contacto, catálogo, carrito de compras, registro de productos, reportes, botón de WhatsApp, etc."></textarea>
+              </div>
+
+              <div class="field full">
+                <label>Imágenes o material del negocio</label>
+                <input id="archivosCliente" type="file" multiple />
+              </div>
+
+              <div class="field full">
+                <label>¿Prefiere que lo contactemos por WhatsApp?</label>
+                <select id="formaContacto">
+                  <option>Sí, quiero que me contacten por WhatsApp</option>
+                  <option>Prefiero correo electrónico</option>
+                  <option>Prefiero llamada</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="submit-btn" type="submit">Enviar solicitud</button>
+            <p id="mensajeFirebase" class="note"></p>
+            <p class="note">Nota: este formulario es una muestra para presentar el proyecto. En una versión real, uno de nuestros trabajadores revisaría la solicitud y se comunicaría personalmente por WhatsApp o correo para pedir imágenes, confirmar detalles y acordar el inicio del producto.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="payments" id="pagos">
+      <div class="title">
+        <small>ECOTECH SOLUTIONS</small>
+        <h2>Formas de pago</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="payment-grid">
+        <div class="payment-card">
+          <div class="icon">🏦</div>
+          <h3>Transferencia bancaria</h3>
+          <p>Banco Verde Digital<br>Cuenta: 0123456789<br>CLABE: 123 456 789 000 111 222</p>
+        </div>
+
+        <div class="payment-card">
+          <div class="icon">💳</div>
+          <h3>Tarjeta</h3>
+          <p>Aceptamos tarjeta de débito o crédito.<br>Terminal: EcoTech-2026<br>Autorización previa por WhatsApp.</p>
+        </div>
+
+        <div class="payment-card">
+          <div class="icon">📲</div>
+          <h3>Pago en línea</h3>
+          <p>Link de pago personalizado.<br>Referencia: ECO-PAGO-001<br>Se envía al correo o WhatsApp del cliente.</p>
+        </div>
+
+        <div class="payment-card">
+          <div class="icon">🏛️</div>
+          <h3>Depósito bancario</h3>
+          <p>Banco Verde Digital<br>No. de convenio: 456789<br>Referencia: nombre de la empresa del cliente.</p>
+        </div>
+
+        <div class="payment-card">
+          <div class="icon">🗓️</div>
+          <h3>Pago en parcialidades</h3>
+          <p>50% de anticipo y 50% al entregar.<br>Para proyectos grandes: hasta 3 pagos.<br>Folio de contrato: ECO-2026.</p>
+        </div>
+
+        <div class="payment-card">
+          <div class="icon">✅</div>
+          <h3>Anticipo</h3>
+          <p>Anticipo mínimo: 40% del total.<br>El resto se paga al entregar el producto.<br>Comprobante por WhatsApp.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="title">
+        <small>HABLEMOS</small>
+        <h2>Contáctanos</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="contact-box">
+        <div class="contact-item">
+          <span>📞</span>
+          <div>
+            <h3>Teléfono</h3>
+            <p>81 1234 5678</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span>✉️</span>
+          <div>
+            <h3>Correo</h3>
+            <p>ecotechsolutions@gmail.com</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span>🌐</span>
+          <div>
+            <h3>Sitio web</h3>
+            <p>www.ecotechsolutions.com</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span>📍</span>
+          <div>
+            <h3>Ubicación</h3>
+            <p>Av. Tecnología Verde #245, Col. Centro Digital, Monterrey, Nuevo León</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span>🕘</span>
+          <div>
+            <h3>Horario</h3>
+            <p>Lunes a viernes, 9:00 a.m. a 6:00 p.m.</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span>📱</span>
+          <div>
+            <h3>Redes sociales</h3>
+            <p>Facebook: EcoTech Solutions<br>Instagram: @ecotechsolutions.mx<br>WhatsApp: 81 2345 6789</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 EcoTech Solutions | Productos digitales para negocios ecológicos</p>
+  </footer>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDj-uB3I_o6l8abkp_FG8sTzOwdn7jC38s",
+      authDomain: "ecotech-solutions-9d2f6.firebaseapp.com",
+      projectId: "ecotech-solutions-9d2f6",
+      storageBucket: "ecotech-solutions-9d2f6.firebasestorage.app",
+      messagingSenderId: "224860216987",
+      appId: "1:224860216987:web:63f699374683d27d91303e",
+      measurementId: "G-YV5F3VJ2K1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.abrirSeccion = function(id, boton) {
+      var secciones = document.querySelectorAll('main section');
+      var botones = document.querySelectorAll('.nav-btn');
+
+      for (var i = 0; i < secciones.length; i++) {
+        secciones[i].style.display = 'none';
+        secciones[i].classList.remove('active');
+      }
+
+      for (var j = 0; j < botones.length; j++) {
+        botones[j].classList.remove('active-link');
+      }
+
+      var seccion = document.getElementById(id);
+      if (seccion) {
+        seccion.style.display = 'block';
+        seccion.classList.add('active');
+      }
+
+      if (id === 'inicio' && seccion) {
+        seccion.style.display = 'flex';
+      }
+
+      if (boton) {
+        boton.classList.add('active-link');
+      } else {
+        var botonMenu = document.querySelector('.nav-btn[onclick*="' + id + '"]');
+        if (botonMenu) {
+          botonMenu.classList.add('active-link');
+        }
+      }
+
+      window.scrollTo(0, 0);
+    }
+
+    const formulario = document.getElementById("formSolicitud");
+    const mensajeFirebase = document.getElementById("mensajeFirebase");
+
+    formulario.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      mensajeFirebase.textContent = "Enviando solicitud...";
+
+      const archivos = document.getElementById("archivosCliente").files;
+      const nombresArchivos = [];
+
+      for (let i = 0; i < archivos.length; i++) {
+        nombresArchivos.push(archivos[i].name);
+      }
+
+      try {
+        await addDoc(collection(db, "solicitudes"), {
+          productoContratado: document.getElementById("productoContratado").value,
+          nombreCliente: document.getElementById("nombreCliente").value,
+          nombreEmpresa: document.getElementById("nombreEmpresa").value,
+          tipoNegocio: document.getElementById("tipoNegocio").value,
+          correo: document.getElementById("correo").value,
+          whatsapp: document.getElementById("whatsapp").value,
+          informacionProducto: document.getElementById("informacionProducto").value,
+          estiloDeseado: document.getElementById("estiloDeseado").value,
+          funcionesNecesarias: document.getElementById("funcionesNecesarias").value,
+          archivosSeleccionados: nombresArchivos,
+          formaContacto: document.getElementById("formaContacto").value,
+          estado: "pendiente",
+          fechaSolicitud: serverTimestamp()
+        });
+
+        mensajeFirebase.textContent = "Solicitud enviada correctamente. EcoTech Solutions se comunicará contigo para continuar.";
+        formulario.reset();
+      } catch (error) {
+        console.error("Error al guardar en Firebase:", error);
+        mensajeFirebase.textContent = "No se pudo enviar la solicitud. Revisa la conexión o las reglas de Firebase.";
+      }
+    });
+  </script>
+</body>
+</html>
